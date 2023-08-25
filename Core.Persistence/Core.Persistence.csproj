@@ -9,10 +9,12 @@
   <ItemGroup>
     <None Remove="Repositories\" />
     <None Remove="Paging\" />
+    <None Remove="Dynamic\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Repositories\" />
     <Folder Include="Paging\" />
+    <Folder Include="Dynamic\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.10" />

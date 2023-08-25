@@ -8,14 +8,14 @@ namespace Core.Persistence.Paging
 			Items = Array.Empty<T>();
 		}
 
-		public int Size { get; set; } // sayfada kaç data
-		public int Index { get; set; } // hangi sayfadayız
-		public int Count { get; set; } // toplam kayıp sayısı kaç
-		public int Pages { get; set; } // toplam kaç sayfa var
+		public int Size { get; set; } 
+		public int Index { get; set; } 
+		public int Count { get; set; } 
+		public int Pages { get; set; } 
 		public IList<T> Items { get; set; }
 
-		public bool HasPrevious => Index > 0; // önceki sayfa varmı
-		public bool HasNext => Index + 1 < Pages; // 8 aslında 9. sayfadayız
+		public bool HasPrevious => Index > 0;
+		public bool HasNext => Index + 1 < Pages;
 
 	}
 }
