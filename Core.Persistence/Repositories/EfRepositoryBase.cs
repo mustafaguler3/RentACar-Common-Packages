@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Query;
 
 namespace Core.Persistence.Repositories
 {
-	public class EfRepositoryBase<TEntity,TEntityId,TContext> : IAsyncRepository<TEntity,TEntityId>//,IRepository<TEntity,TEntityId>
+	public class EfRepositoryBase<TEntity,TEntityId,TContext> : IAsyncRepository<TEntity,TEntityId>,IRepository<TEntity,TEntityId>
 		where TEntity: Entity<TEntityId>
 		where TContext : DbContext
 	{
@@ -258,6 +258,56 @@ namespace Core.Persistence.Repositories
         {
             foreach (TEntity entity in entities)
                 await SetEntityAsDeletedAsync(entity, permanent);
+        }
+
+        TEntity? IRepository<TEntity, TEntityId>.GetAsync(Expression<Func<TEntity, bool>> predicate, Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>? include, bool withDeleted, bool enableTracking, CancellationToken cancellationToken)
+        {
+            throw new NotImplementedException();
+        }
+
+        Paginate<TEntity> IRepository<TEntity, TEntityId>.GetListAsync(Expression<Func<TEntity, bool>>? predicate, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? orderBy, Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>? include, int index, int size, bool withDeleted, bool enableTracking, CancellationToken cancellationToken)
+        {
+            throw new NotImplementedException();
+        }
+
+        Paginate<TEntity> IRepository<TEntity, TEntityId>.GetListByDynamicAsync(DynamicQuery dynamic, Expression<Func<TEntity, bool>>? predicate, Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>? include, int index, int size, bool withDeleted, bool enableTracking, CancellationToken cancellationToken)
+        {
+            throw new NotImplementedException();
+        }
+
+        bool IRepository<TEntity, TEntityId>.AnyAsync(Expression<Func<TEntity, bool>>? predicate, bool withDeleted, bool enableTracking, CancellationToken cancellationToken)
+        {
+            throw new NotImplementedException();
+        }
+
+        TEntity IRepository<TEntity, TEntityId>.AddAsyn(TEntity entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        ICollection<TEntity> IRepository<TEntity, TEntityId>.AddRangeAsync(ICollection<TEntity> entities)
+        {
+            throw new NotImplementedException();
+        }
+
+        TEntity IRepository<TEntity, TEntityId>.UpdateAsync(TEntity entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        ICollection<TEntity> IRepository<TEntity, TEntityId>.UpdateRangeAsync(ICollection<TEntity> entities)
+        {
+            throw new NotImplementedException();
+        }
+
+        TEntity IRepository<TEntity, TEntityId>.DeleteAsync(TEntity entity, bool permanent)
+        {
+            throw new NotImplementedException();
+        }
+
+        ICollection<TEntity> IRepository<TEntity, TEntityId>.DeleteRangeAsync(ICollection<TEntity> entities, bool permanent)
+        {
+            throw new NotImplementedException();
         }
         #endregion
     }

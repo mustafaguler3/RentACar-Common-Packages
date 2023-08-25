@@ -6,7 +6,8 @@ using Core.Persistence.Dynamic;
 
 namespace Core.Persistence.Repositories
 {
-	public interface IRepository<TEntity,TEntityId> : IQuery<TEntity> where TEntity : Entity<TEntityId>
+	public interface IRepository<TEntity,TEntityId> : IQuery<TEntity>
+        where TEntity : Entity<TEntityId>
 	{
         TEntity? GetAsync(Expression<Func<TEntity, bool>> predicate,
             Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>? include = null,

@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Requests\" />
+    <None Remove="Responses\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Requests\" />
+    <Folder Include="Responses\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Core.Persistence\Core.Persistence.csproj" />
+  </ItemGroup>
+</Project>
