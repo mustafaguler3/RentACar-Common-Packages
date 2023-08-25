@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Linq.Expressions;
+using Core.Persistence.Dynamic;
+using Core.Persistence.Paging;
 using Microsoft.EntityFrameworkCore.Query;
 
 namespace Core.Persistence.Repositories
@@ -13,7 +15,7 @@ namespace Core.Persistence.Repositories
 			CancellationToken cancellationToken = default);//join atmamızı sağlayacak 2. parametrede yazdığımız, db de silinenleri sorgularda getireyimmi demek 3.parametredeki,
 														   //cancellationToken - asenktron operasyonlarda iptal etmek için
 
-		Task<IPaginate<TEntity>> GetListAsync(
+		Task<Paginate<TEntity>> GetListAsync(
 			Expression<Func<TEntity, bool>>? predicate = null,
 			Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? orderBy = null,
 			Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>? include = null,
@@ -24,7 +26,7 @@ namespace Core.Persistence.Repositories
 			CancellationToken cancellationToken = default
 			);
 
-        Task<IPaginate<TEntity>> GetListByDynamicAsync(
+        Task<Paginate<TEntity>> GetListByDynamicAsync(
 			DynamicQuery dynamic,
             Expression<Func<TEntity, bool>>? predicate = null,
             Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>? include = null,

@@ -12,8 +12,7 @@ namespace Core.Persistence.Repositories
             Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>? include = null,
             bool withDeleted = false,
             bool enableTracking = true,
-            CancellationToken cancellationToken = default);//join atmamızı sağlayacak 2. parametrede yazdığımız, db de silinenleri sorgularda getireyimmi demek 3.parametredeki,
-                                                           //cancellationToken - asenktron operasyonlarda iptal etmek için
+            CancellationToken cancellationToken = default);
 
         Paginate<TEntity> GetListAsync(
             Expression<Func<TEntity, bool>>? predicate = null,
@@ -25,6 +24,7 @@ namespace Core.Persistence.Repositories
             bool enableTracking = true,
             CancellationToken cancellationToken = default
             );
+
 
         Paginate<TEntity> GetListByDynamicAsync(
             DynamicQuery dynamic,
