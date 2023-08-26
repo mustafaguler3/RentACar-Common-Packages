@@ -9,10 +9,12 @@
   <ItemGroup>
     <None Remove="Requests\" />
     <None Remove="Responses\" />
+    <None Remove="Rules\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Requests\" />
     <Folder Include="Responses\" />
+    <Folder Include="Rules\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core.Persistence\Core.Persistence.csproj" />
