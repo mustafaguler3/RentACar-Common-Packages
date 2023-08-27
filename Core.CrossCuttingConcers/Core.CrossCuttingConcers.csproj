@@ -9,9 +9,22 @@
   <ItemGroup>
     <None Remove="Exceptions\" />
     <None Remove="Exceptions\Types\" />
+    <None Remove="Exceptions\Handlers\" />
+    <None Remove="Exceptions\HttpProblemDetails\" />
+    <None Remove="Exceptions\Extensions\" />
+    <None Remove="Exceptions\Middleware\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Exceptions\" />
     <Folder Include="Exceptions\Types\" />
+    <Folder Include="Exceptions\Handlers\" />
+    <Folder Include="Exceptions\HttpProblemDetails\" />
+    <Folder Include="Exceptions\Extensions\" />
+    <Folder Include="Exceptions\Middleware\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Abstractions" Version="7.0.10" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
   </ItemGroup>
 </Project>
