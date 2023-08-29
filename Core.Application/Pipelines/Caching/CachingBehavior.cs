@@ -3,6 +3,8 @@ using System.Text;
 using System.Text.Json;
 using MediatR;
 using Microsoft.Extensions.Caching.Distributed;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 
 namespace Core.Application.Pipelines.Caching
 {
@@ -12,11 +14,14 @@ namespace Core.Application.Pipelines.Caching
 
         private readonly CacheSettings _cacheSettings;
         private readonly IDistributedCache _distributedCache;
+        private readonly ILogger<CachingBehavior<TRequest, TResponse>> _logger;
 
-        public CachingBehavior(CacheSettings cacheSettings, IDistributedCache distributedCache)
+        public CachingBehavior(IDistributedCache distributedCache, IConfiguration configuration, ILogger<CachingBehavior<TRequest, TResponse>> logger)
         {
-            _cacheSettings = cacheSettings;
+            _cacheSettings = configuration.GetSection("CacheSettings").Get<CacheSettings>() ?? throw new InvalidOperationException();
+
             _distributedCache = distributedCache;
+            _logger = logger;
         }
 
         public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
@@ -27,7 +32,7 @@ namespace Core.Application.Pipelines.Caching
             }
 
             TResponse response;
-            byte[]? cachedResponse = await _distributedCache.Get(request.CacheKey, cancellationToken);
+            byte[]? cachedResponse = await _distributedCache.GetAsync(request.CacheKey, cancellationToken);
             if(cachedResponse != null)
             {
                 response = JsonSerializer.Deserialize<TResponse>(Encoding.Default.GetString(cachedResponse));
@@ -50,7 +55,7 @@ namespace Core.Application.Pipelines.Caching
             byte[] serializeData = Encoding.UTF8.GetBytes(JsonSerializer.Serialize(response));
 
             await _distributedCache.SetAsync(request.CacheKey,serializeData,cacheOptions,cancellationToken);
-
+            _logger.LogInformation($"Added to cache -> {request.CacheKey}");
             return response;
         }
     }
