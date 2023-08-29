@@ -10,13 +10,25 @@
     <None Remove="Requests\" />
     <None Remove="Responses\" />
     <None Remove="Rules\" />
+    <None Remove="Pipelines\" />
+    <None Remove="Pipelines\Validation\" />
+    <None Remove="Pipelines\Transaction\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Requests\" />
     <Folder Include="Responses\" />
     <Folder Include="Rules\" />
+    <Folder Include="Pipelines\" />
+    <Folder Include="Pipelines\Validation\" />
+    <Folder Include="Pipelines\Transaction\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core.Persistence\Core.Persistence.csproj" />
+    <ProjectReference Include="..\Core.CrossCuttingConcers\Core.CrossCuttingConcers.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.1.0" />
+    <PackageReference Include="MediatR" Version="12.1.1" />
+    <PackageReference Include="FluentValidation" Version="11.7.1" />
   </ItemGroup>
 </Project>
