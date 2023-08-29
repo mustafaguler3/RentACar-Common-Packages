@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Text;
+using System.Text.Json;
 using MediatR;
 using Microsoft.Extensions.Caching.Distributed;
 
@@ -23,11 +25,26 @@ namespace Core.Application.Pipelines.Caching
 
             TResponse response = await next();
 
-            if(request.CacheKey != null)
+            if (request.CacheGroupKey != null)
             {
-                await _cache.RemoveAsync(request.CacheKey,cancellationToken);
+                byte[]? cachedGroup = await _cache.GetAsync(request.CacheGroupKey, cancellationToken);
+                if (cachedGroup != null)
+                {
+                    HashSet<string> keysInGroup = JsonSerializer.Deserialize<HashSet<string>>(Encoding.Default.GetString(cachedGroup))!;
+                    foreach (string key in keysInGroup)
+                    {
+                        await _cache.RemoveAsync(key, cancellationToken);
+                    }
+
+                    await _cache.RemoveAsync(request.CacheGroupKey, cancellationToken);
+                    await _cache.RemoveAsync(key: $"{request.CacheGroupKey}SlidingExpiration", cancellationToken);
+                }
             }
 
+            if (request.CacheKey != null)
+            {
+                await _cache.RemoveAsync(request.CacheKey, cancellationToken);
+            }
             return response;
         }
     }
