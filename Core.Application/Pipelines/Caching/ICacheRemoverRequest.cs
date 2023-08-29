@@ -1,13 +1,11 @@
 ﻿using System;
 namespace Core.Application.Pipelines.Caching
 {
-    public interface ICacheableRequest
+	public interface ICacheRemoverRequest
 	{
 		string CacheKey { get; }
+
 		bool ByPassCache { get; }
-		TimeSpan? SlidingExpiration { get; }
-		string? CacheGroupKey { get; }
-		
 	}
 }
 
