@@ -14,6 +14,7 @@
     <None Remove="Pipelines\Validation\" />
     <None Remove="Pipelines\Transaction\" />
     <None Remove="Pipelines\Caching\" />
+    <None Remove="Pipelines\Logging\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Requests\" />
@@ -23,6 +24,7 @@
     <Folder Include="Pipelines\Validation\" />
     <Folder Include="Pipelines\Transaction\" />
     <Folder Include="Pipelines\Caching\" />
+    <Folder Include="Pipelines\Logging\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core.Persistence\Core.Persistence.csproj" />
